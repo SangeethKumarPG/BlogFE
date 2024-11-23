@@ -103,6 +103,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (userName !== "" && password !== "") {
         const response = await loginAPI({
@@ -131,7 +132,7 @@ function Login() {
     } catch (error) {
         console.log(error);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   };
 
@@ -204,17 +205,17 @@ function Login() {
                   color="primary"
                   className="w-100"
                   onClick={handleLogin}
-                  disabled = {userNameError || passwordError}
+                  disabled = {loading ||userNameError || passwordError}
                 >
                     
                     {loading ? (
                       <OrbitProgress
-                        dense
-                        color="#ab9deb"
-                        size="small"
-                        text=""
-                        textColor="#6294e4"
-                      />
+                      dense
+                      color="#ab9deb"
+                      size="small"
+                      text=""
+                      textColor="#6294e4"
+                    />
                     ) : (
                       "Login"
                     )}
@@ -309,7 +310,7 @@ function Login() {
                   color="primary"
                   className="w-100"
                   onClick={handleRegister}
-                  disabled = {userNameError || passwordError || confirmPasswordError}
+                  disabled = {loading||userNameError || passwordError || confirmPasswordError}
                 >
                   {loading ? (
                       <OrbitProgress
